@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Song Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Song Directory</h3>
+    <a th:href ="@{/api/song/addSongForm}" class = "btn btn-info btn-sm">Add Song</a>
+    <hr>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Album</th>
+            <th>Genre</th>
+            <th>Action</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="song : ${songs}">
+
+            <td th:text="${song.author}" />
+            <td th:text="${song.title}" />
+            <td th:text="${song.album}" />
+            <td th:text="${song.genre.getName()}" />
+            <td>
+                <a th:href ="@{/api/song/showFormForUpdate(songId=${song.id})}" class = "btn btn-info btn-sm">Update</a>
+                <a th:href ="@{/api/song/delete(songId=${song.id})}" class = "btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you want to delete this song?'))) return false">Delete</a>
+
+            </td>
+
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
+
+
+
